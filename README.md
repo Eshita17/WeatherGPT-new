@@ -1,4 +1,4 @@
-# WeatherGPT — SIH26068
+# WeatherGPT 
 
 A runnable, beginner-friendly implementation of the WeatherGPT plan:
 - Real-time weather via Open-Meteo
