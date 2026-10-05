@@ -1,0 +1,8 @@
+/apps/ @member-a
+/services/agent/ @member-a
+/services/voice/ @member-a
+/services/ingest/ @member-b
+/services/nowcast/ @member-b
+/services/alerts/ @member-b
+/services/advisory/ @member-b
+/infra/ @member-b

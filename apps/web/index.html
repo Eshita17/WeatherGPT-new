@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#43a8f5">
+  <meta name="description" content="WeatherGPT — sky-blue glassmorphism weather intelligence">
+  <link rel="manifest" href="/manifest.webmanifest?v=4">
+  <link rel="stylesheet" href="/styles.css?v=4">
+  <title>WeatherGPT — Skyglass</title>
+</head>
+<body>
+  <div class="sky-scene" aria-hidden="true">
+    <div class="sun-glow"></div>
+    <div class="cloud cloud-a"></div>
+    <div class="cloud cloud-b"></div>
+    <div class="mountains mountains-back"></div>
+    <div class="mountains mountains-front"></div>
+    <div class="lake"></div>
+  </div>
+
+  <header class="topbar glass">
+    <div class="brand">
+      <div class="brand-icon">☁️</div>
+      <div><b>WeatherGPT</b><small>AI Weather Intelligence</small></div>
+    </div>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <button class="nav-btn active" data-view="chat"><span>⌂</span> Home</button>
+      <button class="nav-btn" data-view="alerts"><span>⚠</span> Forecast</button>
+      <button class="nav-btn" data-view="advisory"><span>△</span> Advisory</button>
+      <button class="nav-btn" data-view="trust"><span>◷</span> History</button>
+      <button class="nav-btn" data-view="trust"><span>ⓘ</span> About</button>
+    </nav>
+    <div class="top-actions">
+      <div class="top-language">◎ <span>EN</span>⌄</div>
+      <button class="round-icon" title="Weather settings">☼</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="chat" class="view active">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="greeting">Good morning! 👋</div>
+          <span class="eyebrow">AI WEATHER COMPANION · SOURCE-AWARE</span>
+          <h1>Ask the weather.<br><span>Know the source.</span></h1>
+          <p>Get real-time, intelligent weather updates with AI-powered insights, forecasts and natural-language support.</p>
+          <div class="feature-pills">
+            <span>⚡ Real-time Data</span><span>⌖ Multi-location</span><span>✦ AI Insights</span><span>♢ Reliable Sources</span>
+          </div>
+          <div id="aiStatus" class="ai-status glass-soft">Checking AI assistant…</div>
+        </div>
+        <div class="weather-card glass" id="currentCard"><div class="loading">Loading weather…</div></div>
+      </div>
+
+      <div class="workspace glass">
+        <aside class="sidebar">
+          <div class="side-location"><span>⌖</span><b id="sideCity">Mumbai</b><span>⌄</span></div>
+          <button class="side-btn active">⌂ <span>Current Weather</span></button>
+          <button class="side-btn" data-view="alerts">▣ <span>Forecast</span></button>
+          <button class="side-btn" data-view="advisory">△ <span>Advisory</span></button>
+          <button class="side-btn" data-view="trust">◷ <span>History</span></button>
+          <button class="side-btn">⚙ <span>Settings</span></button>
+          <div class="side-divider"></div>
+          <div class="side-tip">
+            <b>☁ Smarter weather</b>
+            <span>for a better tomorrow</span>
+            <div class="wave">〰〰〰</div>
+          </div>
+        </aside>
+
+        <div class="chat-area">
+          <div class="chat-toolbar">
+            <div>
+              <b>WeatherGPT ✨</b>
+              <span>Ask me anything about the weather.</span>
+            </div>
+            <div class="location-language">
+              <label>Location <select id="city"><option>Mumbai</option><option>Pune</option><option>Mysuru</option><option>Delhi</option><option>Bengaluru</option><option>Hyderabad</option><option>Chennai</option><option>Kolkata</option></select></label>
+              <div class="lang-row">
+                <button class="lang active" data-lang="en">EN</button><button class="lang" data-lang="hi">HI</button><button class="lang" data-lang="mr">MR</button><button class="lang" data-lang="kn">KN</button><button class="lang" data-lang="te">TE</button><button class="lang" data-lang="ta">TA</button><button class="lang" data-lang="bn">BN</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="messages" id="messages">
+            <div class="welcome-bubble glass-soft">
+              <b>Hey! I'm WeatherGPT ✨</b>
+              <span>Ask me anything about the weather. Try “Will it rain tomorrow?” or “What should I carry today?”</span>
+            </div>
+          </div>
+
+          <div class="composer glass-soft">
+            <button id="mic" class="composer-icon" title="Use browser speech recognition">✦</button>
+            <input id="message" placeholder="Ask about weather, rain, wind, heat…" />
+            <button id="send" class="send-btn" aria-label="Send">➤</button>
+          </div>
+          <div class="source-note">WeatherGPT answers your actual question using live weather data. AI provider and source are shown with each response.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="alerts" class="view glass section-card">
+      <div class="section-head"><div><span class="eyebrow">LIVE WEATHER</span><h2>Forecast & alert center</h2><p>Monitor active weather signals and replay a severe-weather demo event.</p></div><button id="replay" class="action-btn">Replay storm</button></div>
+      <div class="status glass-soft"><span class="status-dot" id="wsStatus"></span><span id="wsText">Connecting to live alert stream…</span></div>
+      <div id="alertsList" class="stack"></div>
+    </section>
+
+    <section id="advisory" class="view glass section-card">
+      <div class="section-head"><div><span class="eyebrow">DECISION SUPPORT</span><h2>7-day sector advisory</h2><p>Translate forecast conditions into practical actions.</p></div></div>
+      <div class="controls glass-soft"><label>Sector <select id="sector"><option value="agriculture">Agriculture</option><option value="aviation">Aviation</option><option value="marine">Marine</option><option value="urban">Urban</option></select></label><button id="loadAdvisory" class="action-btn">Build calendar</button></div>
+      <div id="calendar" class="calendar"></div>
+    </section>
+
+    <section id="trust" class="view glass section-card">
+      <div class="section-head"><div><span class="eyebrow">TRUST & PROVENANCE</span><h2>WeatherGPT trust dashboard</h2><p>Keep measured evaluation separate from platform configuration.</p></div></div>
+      <div class="metrics" id="metrics"></div>
+      <div class="glass-soft info-card"><h3>What the score means</h3><p>The dashboard separates measured evaluation from platform configuration. Replace fixture values with CI-generated results before making public performance claims.</p></div>
+    </section>
+  </main>
+
+  <script src="/app.js?v=4"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js?v=3').catch(() => {});
+    }
+  </script>
+</body>
+</html>

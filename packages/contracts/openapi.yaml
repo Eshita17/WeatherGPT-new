@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info:
+  title: WeatherGPT Contracts
+  version: 1.0.0
+paths:
+  /v1/chat:
+    post:
+      summary: Chat with WeatherGPT
+  /v1/chat/stream:
+    post:
+      summary: Stream an answer over SSE
+  /v1/weather:
+    get:
+      summary: Current and seven-day weather
+  /v1/advisory:
+    post:
+      summary: Sector decision calendar
+  /v1/alerts/replay:
+    post:
+      summary: Replay a demo alert

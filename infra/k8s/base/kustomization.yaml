@@ -1,0 +1,4 @@
+resources:
+- namespace.yaml
+- api-deployment.yaml
+- hpa.yaml

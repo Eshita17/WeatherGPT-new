@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: weathergpt
+      POSTGRES_USER: weathergpt
+      POSTGRES_PASSWORD: weathergpt
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  emqx:
+    image: emqx/emqx:5
+    ports: ["1883:1883", "18083:18083"]
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      OPEN_METEO_BASE_URL: https://api.open-meteo.com
+      DATABASE_URL: postgresql+psycopg://weathergpt:weathergpt@postgres:5432/weathergpt
+      REDIS_URL: redis://redis:6379/0
+      MQTT_HOST: emqx
+      MQTT_PORT: 1883
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.0-flash}
+      CORS_ORIGINS: "*"
+    ports: ["8000:8000"]
+    depends_on: [postgres, redis, emqx]
+
+volumes:
+  pgdata:

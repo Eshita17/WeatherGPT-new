@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: weathergpt-dev
+  namespace: argocd
+spec:
+  source:
+    repoURL: https://github.com/REPLACE_WITH_YOUR_REPO/weathergpt.git
+    path: infra/k8s/overlays/dev
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: weathergpt-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

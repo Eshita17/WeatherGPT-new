@@ -1,0 +1,21 @@
+{
+  "title": "WeatherGPT Trust Dashboard",
+  "panels": [
+    {
+      "title": "Requests / min",
+      "type": "timeseries"
+    },
+    {
+      "title": "p95 latency",
+      "type": "timeseries"
+    },
+    {
+      "title": "Alert delivery latency",
+      "type": "stat"
+    },
+    {
+      "title": "Gold-set accuracy",
+      "type": "gauge"
+    }
+  ]
+}
